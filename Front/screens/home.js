@@ -1,56 +1,52 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import Header from "../components/header";
+import ButtonXL from "../components/buttonXL";
+import globalStyle from "../globalStyle";
 
 const { width } = Dimensions.get("screen");
 
-
 export default class Home extends React.Component{
+
+    goTo = (screenName) => {
+        this.props.navigation.navigate(screenName);
+    }
+
     render() {
         return (
-            <View style = {styles.container}>
+            <View style = {globalStyle.container}>
                 <Header
                     title="ErgoRating"
                     canBack={false}
                     canSignOut={true}
+                    navigation={this.props.navigation}
                 />
 
-                <View style = {styles.buttons}>
-                    <TouchableOpacity
-                        style = {styles.button}
-                    >
-                        <Text style={styles.buttonText}>Rapid</Text>
-                        <Text style={styles.buttonText}>Upper</Text>
-                        <Text style={styles.buttonText}>Limb</Text>
-                        <Text style = {styles.buttonText}>Assessment</Text>
-                    </TouchableOpacity>
+                <View style={globalStyle.wrapper}>
 
-                    <TouchableOpacity
-                        style = {styles.button}
-                    >
-                        <Text style={styles.buttonText}>Rapid</Text>
-                        <Text style={styles.buttonText}>Entire</Text>
-                        <Text style={styles.buttonText}>Body</Text>
-                        <Text style = {styles.buttonText}>Assessment</Text>
-                    </TouchableOpacity>
+                    <View style = {styles.buttons}>
 
-                    <TouchableOpacity
-                        style = {styles.button}
-                    >
-                        <Image
-                            source={require("../images/graph.png")}
-                            style = {styles.image}
+                        <ButtonXL
+                            source="Méthode RULA"
+                            onPress={() => this.goTo("RulaObservedEmployeesList")}
                         />
-                    </TouchableOpacity>
 
-                    <TouchableOpacity
-                        style = {styles.button}
-                    >
-                        <Image
-                            source={require("../images/settings.png")}
-                            style = {styles.image}
+                        <ButtonXL
+                            source="Méthode REBA"
                         />
-                    </TouchableOpacity>     
+
+                        <ButtonXL
+                            source="Données & Stats"
+                            onPress={() => this.goTo("Data")}
+                        />
+
+                        <ButtonXL
+                            source="Paramètres"
+                            onPress={() => this.goTo("Settings")}
+                        />    
+
+                    </View>
+
                 </View>
 
             </View>
@@ -63,11 +59,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#FFFFFF",
     },
     buttons: {
+        flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
+        alignContent: "center",
     },
     button: {
         width: width / 3,

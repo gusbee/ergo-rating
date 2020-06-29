@@ -1,32 +1,46 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from "react-native";
+
+const { width, height } = Dimensions.get("screen");
 
 /**
  * 
- * @param {*} props
- * title: string
- * canback: boolean
- * canSignOut: boolean
- * navigation: navigation props 
+ * THow to use :
+ * <Header 
+ *  title: "Header's title"
+ *  canback={boolean}
+ *  canSignOut={boolean}
+ *  navigation={this.props.navigation} 
+ * />
  */
 export default function Header(props) {
-
     return (
         <View style={styles.header}>
-            
+
             <TouchableOpacity
-                style={props.canBack ? { display: "flex" } : { display: "none" }}
+                style={props.canBack ? styles.sideButtons : { opacity: 0 }}
+                disabled={!props.canBack}
                 onPress={() => props.navigation.goBack()}
             >
-                <Text style = {styles.headerText}>back</Text>
+                <Image
+                    source={require("../images/back.png")}
+                    style={styles.back}
+                />
             </TouchableOpacity>
 
             <Text style = {styles.headerText}>
                 {props.title}
             </Text>
 
-            <TouchableOpacity style={props.canSignOut ? {display: "flex"} : {display: "none"}}>
-                <Text style = {styles.headerText}>out</Text>
+            <TouchableOpacity
+                style={props.canSignOut ? styles.sideButtons : { opacity: 0 }}
+                disabled={!props.canSignOut}
+                onPress={() => props.navigation.navigate("SignIn")}
+            >
+                <Image
+                    source={require("../images/signout.png")}
+                    style={styles.signOut}
+                />
             </TouchableOpacity>
 
         </View>
@@ -35,8 +49,9 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
     header: {
-        width: "100%",
-        height: 72,
+        width: width,
+        height: height / 10,
+        minHeight: 72,
         paddingHorizontal: 16,
         backgroundColor: "#203455",
         flexDirection: "row",
@@ -48,8 +63,22 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontFamily: "openSans",
-        fontSize: 20,
+        fontSize: width > 500 ? 25 : 20,
         color: "#FFFFFF",
         textAlign: "center",
+    },
+    sideButtons: {
+        width: 48,
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    back: {
+        width: 24,
+        height: 12,
+    },
+    signOut: {
+        width: 24,
+        height: 24,
     }
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, Dimensions } from "react-native";
 
 /**
  * 
@@ -9,8 +9,9 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
  * disabled: boolean
  */
 
-export default function Button(props) {
+const { width, height } = Dimensions.get("window");
 
+export default function ButtonSM(props) {
     return (
         <TouchableOpacity
         style={props.disabled ? styles.buttonDisabled : styles.button}
@@ -30,29 +31,35 @@ export default function Button(props) {
 
 const styles = StyleSheet.create({
     button: {
-        width: 300,
-        height: 48,
+        width: "100%",
+        maxWidth: 500,
+        height: height / 20,
+        minHeight: 48,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#203455",
         marginVertical: 12,
+        borderRadius: 12,
     },
     buttonText: {
         fontFamily: "openSans",
-        fontSize: 15,
+        fontSize: width > 500 ? 22 : 20,
         color: "#FFFFFF"
     },
     buttonDisabled: {
-        width: 300,
-        height: 48,
+        width: "100%",
+        maxWidth: 500,
+        height: height / 20,
+        minHeight: 48,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#404040",
         marginVertical: 12,
+        borderRadius: 12,
     },
     buttonTextDisabled: {
         fontFamily: "openSans",
-        fontSize: 15,
+        fontSize: width > 500 ? 22 : 20,
         color: "#979797"
     },
 })

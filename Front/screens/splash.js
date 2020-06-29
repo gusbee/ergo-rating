@@ -23,11 +23,14 @@ const styles = StyleSheet.create({
         fontSize: 70,
         color: "#FFFFFF",
         textTransform: "uppercase",
+        position: "absolute",
+        bottom: "50%",
     },
     bottomText: {
         fontFamily: "sourceSansProLight",
         fontSize: 40,
         color: "#FFFFFF",
         textTransform: "uppercase",
+        marginTop: 12,
     }
 })

@@ -1,8 +1,9 @@
 import React from "react";
 import Axios from "axios";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TextInput } from "react-native";
 import Header from "../components/header";
-import Button from "../components/button";
+import ButtonSM from "../components/buttonSM";
+import globalStyle from "../globalStyle";
 
 export default class SignIn extends React.Component{
 
@@ -111,54 +112,63 @@ export default class SignIn extends React.Component{
 
     render() {
         return (
-            <View style = { styles.container }>
+            <View style = { globalStyle.container }>
                 <Header
                     title="ErgoRating"
                     canBack={true}
                     canSignOut={false}
                     navigation={this.props.navigation}
                 />
-                
-                <Text style = {styles.message}>{this.state.message}</Text>
-                
-                <TextInput
-                    style = {styles.input}
-                    placeholder = "Nom de l'entreprise"
-                    placeholderTextColor = "rgba(0,0,0,0.6)"
-                    onChangeText={this.handleCompanyName}
-                    onEndEditing = {() => this.controlCompanyName(this.state.companyName)}
-                />
+                <View style={globalStyle.wrapper}>
 
-                <TextInput
-                    style={styles.input}
-                    keyboardType = "number-pad"
-                    placeholder = "Nombre d'employés"
-                    placeholderTextColor = "rgba(0,0,0,0.6)"
-                    onChangeText={this.handleNumberOfEmployees}
-                    onEndEditing = {() => this.controlNumberOfEmployees(this.state.numberOfEmployees)}
-                />
-
-                <TextInput
-                    style = {styles.input}
-                    placeholder = "Identifiant de connexion"
-                    placeholderTextColor = "rgba(0,0,0,0.6)"
-                    onChangeText={this.handleLogin}
-                    onEndEditing = { () => this.controlLogin(this.state.login)}
-                />
+                    <View style={globalStyle.body}>
                 
-                <TextInput
-                    style = {styles.input}
-                    placeholder="Mot de passe"
-                    placeholderTextColor = "rgba(0,0,0,0.6)"
-                    onChangeText={this.handlePassword}
-                    onEndEditing = { () => this.controlPassword(this.state.password)}
-                />
+                        <Text style = {styles.message}>{this.state.message}</Text>
+                        
+                        <TextInput
+                            style = {globalStyle.input}
+                            placeholder = "Nom de l'entreprise"
+                            placeholderTextColor = "rgba(0,0,0,0.6)"
+                            onChangeText={this.handleCompanyName}
+                            onEndEditing = {() => this.controlCompanyName(this.state.companyName)}
+                        />
 
-                <Button
-                    title="Valider"
-                    onPress={this.createNewUser}
-                    disabled={this.canValidate() ? true : false}
-                />
+                        <TextInput
+                            style={globalStyle.input}
+                            keyboardType = "number-pad"
+                            placeholder = "Nombre d'employés"
+                            placeholderTextColor = "rgba(0,0,0,0.6)"
+                            onChangeText={this.handleNumberOfEmployees}
+                            onEndEditing = {() => this.controlNumberOfEmployees(this.state.numberOfEmployees)}
+                        />
+
+                        <TextInput
+                            style = {globalStyle.input}
+                            placeholder = "Identifiant de connexion"
+                            placeholderTextColor = "rgba(0,0,0,0.6)"
+                            onChangeText={this.handleLogin}
+                            onEndEditing = { () => this.controlLogin(this.state.login)}
+                        />
+                        
+                        <TextInput
+                            style = {globalStyle.input}
+                            placeholder="Mot de passe"
+                            placeholderTextColor = "rgba(0,0,0,0.6)"
+                            onChangeText={this.handlePassword}
+                            onEndEditing = { () => this.controlPassword(this.state.password)}
+                        />
+                    </View>
+
+                    <View style={globalStyle.submit}>
+                        <ButtonSM
+                            title="Valider"
+                            onPress={this.createNewUser}
+                            disabled={this.canValidate() ? true : false}
+                        />
+                    </View>
+
+                    
+                </View>
 
             </View>
         )
@@ -170,6 +180,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#FFFFFF",
     },
     message: {
         fontFamily: "openSans",
